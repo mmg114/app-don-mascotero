@@ -1,0 +1,17 @@
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_S3_USER_SECRET}
+      secret-key: ${AWS_S3_PASS_SECRET}
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+spring:
+  config:
+    import: optional:secrets.yml
+  application:
+    name: "don-mascotero"
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/tienda-don-mascotero
