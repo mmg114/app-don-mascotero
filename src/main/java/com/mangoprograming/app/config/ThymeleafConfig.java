@@ -8,7 +8,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 @Configuration
-public class ThymeleafConfig {
+public class ThymeleafConfig {::
 
     @Bean
     @Description("Thymeleaf Template Resolver")
