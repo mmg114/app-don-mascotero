@@ -1,3 +1,22 @@
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${CORREO_USER}
+    password: ${CORREO_PASS}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  config:
+    import: optional:secrets.yml
+  application:
+    name: "don-mascotero"
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/tienda-don-mascotero
 cloud:
   aws:
     credentials:
@@ -7,11 +26,3 @@ cloud:
       static: us-east-1
     stack:
       auto: false
-spring:
-  config:
-    import: optional:secrets.yml
-  application:
-    name: "don-mascotero"
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/tienda-don-mascotero

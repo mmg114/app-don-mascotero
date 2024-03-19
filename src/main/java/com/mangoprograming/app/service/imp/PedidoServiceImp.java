@@ -1,9 +1,12 @@
 package com.mangoprograming.app.service.imp;
 
 import com.mangoprograming.app.exception.ClientException;
+import com.mangoprograming.app.model.Cliente;
 import com.mangoprograming.app.model.Pedido;
 import com.mangoprograming.app.model.Pedido;
 import com.mangoprograming.app.repository.PedidoRepository;
+import com.mangoprograming.app.service.ClienteService;
+import com.mangoprograming.app.service.EmailService;
 import com.mangoprograming.app.service.PedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +20,9 @@ public class PedidoServiceImp implements PedidoService {
 
     private final PedidoRepository pedidoRepository;
 
+    private final ClienteService  clienteService;
+
+    private final EmailService emailService;
     @Override
     public Pedido save(Pedido pedido) {
 
@@ -25,6 +31,9 @@ public class PedidoServiceImp implements PedidoService {
         if (pedidoExistente.isPresent()) {
             throw new ClientException("El pedido con este correo electrónico ya existe");
         }
+        Cliente cliente =clienteService.getCliente(pedido.getClienteId());
+
+        emailService.sendMailPedido(pedido,cliente);
         return  pedidoRepository.save(pedido);
     }
 
